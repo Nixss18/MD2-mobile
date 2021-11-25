@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MD2</string>
+
+    <string-array name="names">
+        <item>Niks Grigors</item>
+        <item>Raivis Tarakanovs</item>
+        <item>Linards Sadovskis</item>
+    </string-array>
+</resources>
