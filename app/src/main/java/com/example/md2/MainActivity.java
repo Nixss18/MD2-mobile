@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.app.Activity;
@@ -15,33 +16,29 @@ import android.app.AlertDialog.Builder;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    private Button button;
     private Button button2;
-
+    String TAG = "MD2";
     private static final String[] names = new String[]{
-      "Niks Grigors", "Raivis Tarakanovs", "Linards Sadovskis"
+      "Raivis Tarakanovs", "Niks Grigors", "Linards Sadovskis"
     };
-    //final String[] namesSurnames = this.getResources().getStringArray(R.array.names);
     private boolean[] clicked = new boolean[names.length];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        button = (Button) findViewById(R.id.button);
         button2= (Button) findViewById(R.id.button2);
-        button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(getApplicationContext(), Activity2.class);
-                startActivity(intent);
-            }
-        });
     }
+    public void onButtonClickMain(View view){
+        Log.d(TAG, "I clicked it");
+        Intent activityIntent = new Intent(this, Activity2.class);
+        startActivity(activityIntent);
+    }
+
 
     public void showDialog(View v){
        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
        alertDialog.setTitle("Group 3")
-               .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+               .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialog, int which) {
 
@@ -62,18 +59,18 @@ public class MainActivity extends AppCompatActivity {
                 switch (which) {
                     case 0:
                         if(isChecked) {
-                            Toast.makeText(MainActivity.this, "Clicked on Niks", Toast.LENGTH_LONG).show();
-                        }
-                        else{
-                            Toast.makeText(MainActivity.this, "Unclicked on Niks", Toast.LENGTH_LONG).show();
-                        }
-                        break;
-                    case 1:
-                        if(isChecked){
                             Toast.makeText(MainActivity.this, "Clicked on Raivis", Toast.LENGTH_LONG).show();
                         }
                         else{
                             Toast.makeText(MainActivity.this, "Unclicked on Raivis", Toast.LENGTH_LONG).show();
+                        }
+                        break;
+                    case 1:
+                        if(isChecked){
+                            Toast.makeText(MainActivity.this, "Clicked on Niks", Toast.LENGTH_LONG).show();
+                        }
+                        else{
+                            Toast.makeText(MainActivity.this, "Unclicked on Niks", Toast.LENGTH_LONG).show();
                         }
                         break;
                     case 2:
@@ -91,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
         alert.setCanceledOnTouchOutside(false);
         alert.show();
         alert.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener(){
-
             public void onClick(View v){
                 Toast.makeText(MainActivity.this, "You clicked Ok", Toast.LENGTH_LONG).show();
                 Boolean close = false;
